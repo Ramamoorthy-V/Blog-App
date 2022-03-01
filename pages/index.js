@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const [name, setName] = useState('')
+  useEffect(() => {
+    fetch('/api/hello').then(res => res.json()).then(data => setName(data.name))
+  })
   return (
     <div className={styles.container}>
       <Head>
@@ -11,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Welcome Ram Sowmya !</h1>
+      <h1>{name}</h1>
       
     </div>
   )
